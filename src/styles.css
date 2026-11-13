@@ -1,0 +1,152 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "@fontsource/jost/latin-300.css";
+@import "@fontsource/jost/latin-400.css";
+@import "@fontsource/jost/latin-500.css";
+@import "@fontsource-variable/fraunces/standard.css";
+@import "@fontsource-variable/fraunces/standard-italic.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PALETA DEL SITIO — editá los colores SOLO acá.
+ * crema #F5F3EE · negro cálido #141414 · dorado #B39A6B · gris texto #6B6B66 · línea #D9D6CE
+ */
+
+@theme inline {
+  --font-serif: var(--font-heading);
+  --font-sans: var(--font-body);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-gold: var(--gold);
+  --color-line: var(--line);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-muted: var(--on-dark-muted);
+  --color-veil: var(--veil);
+}
+
+:root {
+  /* TIPOGRAFÍA — cambiá las fuentes del sitio solo acá. */
+  --font-heading: "Fraunces Variable", "Fraunces", Georgia, serif;
+  --font-body: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --radius: 0rem;
+  --cream: oklch(0.966 0.008 91.5);
+  --ink: oklch(0.195 0 0);
+  --gold: oklch(0.68 0.06 82);
+  --stone: oklch(0.52 0.008 106);
+  --line: oklch(0.88 0.012 91);
+  --on-dark: var(--cream);
+  --on-dark-muted: oklch(0.966 0.008 91.5 / 70%);
+  --veil: oklch(0.12 0 0 / 55%);
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--cream);
+  --card-foreground: var(--ink);
+  --popover: var(--cream);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--cream);
+  --secondary: var(--line);
+  --secondary-foreground: var(--ink);
+  --muted: var(--line);
+  --muted-foreground: var(--stone);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.55 0.18 27);
+  --destructive-foreground: var(--cream);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  em.gold { color: var(--color-gold); font-style: italic; }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* Botones */
+@utility btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.85rem 1.5rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+  border: 1px solid transparent; transition: background-color .25s, color .25s, border-color .25s;
+  cursor: pointer;
+}
+@utility btn-light {
+  background: var(--color-cream); color: var(--color-ink); border-color: var(--color-cream);
+  &:hover { background: transparent; color: var(--color-cream); }
+}
+@utility btn-ghost-light {
+  background: transparent; color: var(--color-cream); border-color: var(--color-cream);
+  &:hover { background: var(--color-cream); color: var(--color-ink); }
+}
+@utility btn-outline {
+  background: transparent; color: var(--color-ink); border-color: var(--color-ink);
+  &:hover { background: var(--color-ink); color: var(--color-cream); }
+}
+
+/* Banda de rubros */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@utility marquee {
+  animation: marquee 40s linear infinite;
+  &:hover { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { animation: none; }
+}
+
+/* Revelado al hacer scroll */
+@utility reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .8s ease, transform .8s ease;
+  &.is-visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { opacity: 1; transform: none; }
+}
+
+@utility underline-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%;
+  transition: background-size .3s;
+}
